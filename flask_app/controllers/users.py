@@ -483,7 +483,6 @@ def search():
     results = data.get("results", [])
 
     if response.status_code == 200:
-        print(results)
         return render_template(
             "result.html",
             movies=results[:18],
@@ -586,9 +585,7 @@ def about():
 
 @app.route('/admin')
 def admin():
-    print(session['user_id'])
     data = {"user_id": session["user_id"]}
-    print(User.get_user_by_id(data))
     if "user_id" in session:
         if User.get_user_by_id(data)['admin'] == 1:
             return render_template("admin.html", users=User.get_all_users(),loggedUser=User.get_user_by_id(data))
